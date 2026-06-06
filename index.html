@@ -166,7 +166,7 @@
       transition:border-color .2s,background .2s;
     }
     .pcard:hover,.pcard:active{border-color:rgba(255,255,255,.18);background:var(--surf2)}
-    .pcard.seen{opacity:.4;cursor:default;pointer-events:none}
+    .pcard.seen{opacity:.7}
     .pcard-avatar{
       width:40px;height:40px;border-radius:50%;background:var(--surf2);
       border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
@@ -320,15 +320,6 @@ function decodeGame(str){
   catch(e){try{return JSON.parse(atob(str))}catch(e2){return null}}
 }
 
-function getSeenKey(encoded){return 'hlc_seen_'+encoded.slice(0,16)}
-function getSeenSet(encoded){
-  try{return new Set(JSON.parse(localStorage.getItem(getSeenKey(encoded))||'[]'))}
-  catch(e){return new Set()}
-}
-function markSeen(encoded,idx){
-  const s=getSeenSet(encoded);s.add(idx);
-  try{localStorage.setItem(getSeenKey(encoded),JSON.stringify([...s]))}catch(e){}
-}
 
 /* ══════════════════════════════════════════
    ACTIONS
@@ -438,9 +429,6 @@ function revealPlayer(){
   _updatePlayerUI();
 }
 function hidePlayer(){
-  // mark as seen in localStorage
-  const hash=location.hash.slice(3);
-  markSeen(hash,S.chosenIdx);
   S.cardPhaseP='hidden';
   const c=document.getElementById('gcp');if(c)c.classList.remove('flipped');
   setTimeout(()=>{S.screen='player-list';render();},450);
@@ -577,14 +565,11 @@ function openLocalFromShare(){
 
 function renderPlayerList(){
   const gd=S.gameData;
-  const hash=location.hash.slice(3);
-  const seen=getSeenSet(hash);
   const items=gd.p.map((p,i)=>{
-    const isSeen=seen.has(i);
-    return`<div class="pcard ${isSeen?'seen':''}" onclick="${isSeen?'':'choosePlayer('+i+')'}">
+    return`<div class="pcard" onclick="choosePlayer(${i})">
       <div class="pcard-avatar">${p.n.charAt(0).toUpperCase()||'?'}</div>
       <div class="pcard-name">${p.n}</div>
-      ${isSeen?'<div class="pcard-badge">ya vista ✓</div>':'<div class="pcard-badge">toca para revelar</div>'}
+      <div class="pcard-badge">toca para revelar</div>
     </div>`;}).join('');
   return`<div class="screen">
     <div style="font-size:3rem;margin:8px 0 6px">🌕</div>
