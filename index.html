@@ -8,914 +8,709 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:         #07070f;
-      --surface:    #10102a;
-      --surface2:   #1a1a3e;
-      --border:     rgba(255,255,255,0.07);
-      --red:        #c0392b;
-      --red-bright: #e74c3c;
-      --gold:       #f1c40f;
-      --gold-dim:   #c8a807;
-      --text:       #e8e8f0;
-      --text-dim:   #6c6c8a;
-      --green:      #27ae60;
-      --radius:     16px;
-      --card-w:     210px;
-      --card-h:     330px;
-      --font-head:  'Cinzel', 'Georgia', serif;
-      --font-body:  'Crimson Text', 'Georgia', serif;
+      --bg:      #07070f;
+      --surf:    #10102a;
+      --surf2:   #1a1a3e;
+      --border:  rgba(255,255,255,0.07);
+      --red:     #c0392b;
+      --red2:    #e74c3c;
+      --gold:    #f1c40f;
+      --goldd:   #c8a807;
+      --text:    #e8e8f0;
+      --dim:     #6c6c8a;
+      --green:   #27ae60;
+      --r:       16px;
+      --cw:      210px;
+      --ch:      330px;
+      --fh:      'Cinzel','Georgia',serif;
+      --fb:      'Crimson Text','Georgia',serif;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-    body {
-      background: var(--bg);
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    body{
+      background:var(--bg);
       background-image:
-        radial-gradient(ellipse 80% 50% at 50% -10%, #1a1a5a 0%, transparent 70%),
-        radial-gradient(ellipse 40% 30% at 80% 20%, #2a0a1a 0%, transparent 60%);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 16px;
-      min-height: 100dvh;
-      overflow-x: hidden;
+        radial-gradient(ellipse 80% 50% at 50% -10%,#1a1a5a 0%,transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 20%,#2a0a1a 0%,transparent 60%);
+      color:var(--text);font-family:var(--fb);font-size:16px;
+      min-height:100dvh;overflow-x:hidden;
     }
+    #app{min-height:100dvh;display:flex;flex-direction:column;align-items:center}
 
-    #app {
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    /* ── SCREEN ── */
+    .screen{
+      width:100%;max-width:480px;min-height:100dvh;
+      display:flex;flex-direction:column;align-items:center;
+      padding:20px 18px 32px;animation:fadeUp .3s ease both;
     }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-    /* ── SCREEN BASE ── */
-    .screen {
-      width: 100%;
-      max-width: 480px;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 18px 32px;
-      animation: fadeUp 0.3s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── TYPOGRAPHY ── */
-    .heading {
-      font-family: var(--font-head);
-      font-size: 1.7rem;
-      color: var(--gold);
-      text-align: center;
-      letter-spacing: 0.06em;
-      text-shadow: 0 0 30px rgba(241,196,15,0.35);
-    }
-
-    .subheading {
-      font-family: var(--font-head);
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      text-align: center;
-      margin-top: 4px;
-      margin-bottom: 24px;
-    }
-
-    .section-label {
-      font-family: var(--font-head);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      align-self: flex-start;
-      width: 100%;
-      margin-bottom: 10px;
-      margin-top: 4px;
-    }
+    /* ── TYPE ── */
+    .heading{font-family:var(--fh);font-size:1.7rem;color:var(--gold);text-align:center;
+      letter-spacing:.06em;text-shadow:0 0 30px rgba(241,196,15,.35)}
+    .subhead{font-family:var(--fh);font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--dim);text-align:center;margin-top:4px;margin-bottom:22px}
+    .sec-label{font-family:var(--fh);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--dim);align-self:flex-start;width:100%;margin-bottom:8px;margin-top:4px}
 
     /* ── BUTTONS ── */
-    .btn {
-      display: block;
-      width: 100%;
-      max-width: 400px;
-      padding: 15px 24px;
-      border: none;
-      border-radius: 12px;
-      font-family: var(--font-head);
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
-      text-align: center;
-    }
+    .btn{display:block;width:100%;max-width:400px;padding:15px 24px;border:none;
+      border-radius:12px;font-family:var(--fh);font-size:.95rem;letter-spacing:.08em;
+      cursor:pointer;touch-action:manipulation;transition:transform .15s,box-shadow .15s,background .15s;
+      text-align:center}
+    .btn:active{transform:scale(.97)}
+    .btn-primary{background:linear-gradient(135deg,var(--red) 0%,#96220f 100%);color:#fff;
+      box-shadow:0 4px 20px rgba(192,57,43,.45)}
+    .btn-primary:hover{background:linear-gradient(135deg,var(--red2),var(--red));
+      box-shadow:0 6px 28px rgba(231,76,60,.55)}
+    .btn-success{background:linear-gradient(135deg,#27ae60 0%,#1a7a42 100%);color:#fff;
+      box-shadow:0 4px 20px rgba(39,174,96,.45)}
+    .btn-success:hover{filter:brightness(1.1)}
+    .btn-ghost{background:transparent;color:var(--dim);border:1px solid rgba(255,255,255,.1);font-size:.85rem}
+    .btn-ghost:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
+    .btn:disabled{opacity:.35;cursor:not-allowed;transform:none!important}
+    .w400{width:100%;max-width:400px}
 
-    .btn:active { transform: scale(0.97); }
+    /* ── COUNTER ── */
+    .counter{width:100%;max-width:400px;display:flex;align-items:center;
+      background:var(--surf);border:1px solid var(--border);border-radius:14px;
+      overflow:hidden;margin-bottom:18px}
+    .cbtn{flex-shrink:0;width:58px;height:62px;background:var(--surf2);border:none;
+      color:var(--text);font-size:1.6rem;cursor:pointer;touch-action:manipulation;
+      display:flex;align-items:center;justify-content:center;transition:background .15s}
+    .cbtn:hover,.cbtn:active{background:rgba(255,255,255,.08)}
+    .ccenter{flex:1;text-align:center;padding:0 8px}
+    .cnum{display:block;font-family:var(--fh);font-size:2rem}
+    .cunit{display:block;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-top:-2px}
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--red) 0%, #96220f 100%);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(192,57,43,0.45);
-    }
-    .btn-primary:hover { background: linear-gradient(135deg, var(--red-bright) 0%, var(--red) 100%); box-shadow: 0 6px 28px rgba(231,76,60,0.55); }
+    /* ── ROLES GRID ── */
+    .rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;
+      width:100%;max-width:400px;margin-bottom:18px}
+    .rchip{display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:12px;
+      border:1.5px solid var(--border);background:var(--surf);cursor:pointer;
+      touch-action:manipulation;transition:border-color .2s,background .2s;user-select:none}
+    .rchip.on{border-color:var(--goldd);background:rgba(241,196,15,.08)}
+    .rchip-icon{font-size:1.35rem}
+    .rchip-name{font-size:.82rem;flex:1;line-height:1.2}
+    .rchip-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(255,255,255,.18);
+      display:flex;align-items:center;justify-content:center;font-size:.6rem;flex-shrink:0;
+      transition:background .2s,border-color .2s}
+    .rchip.on .rchip-dot{background:var(--gold);border-color:var(--gold);color:#000}
 
-    .btn-success {
-      background: linear-gradient(135deg, #27ae60 0%, #1a7a42 100%);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(39,174,96,0.45);
-    }
-    .btn-success:hover { filter: brightness(1.1); }
+    /* ── SUMMARY ── */
+    .sumbox{width:100%;max-width:400px;background:var(--surf);border:1px solid var(--border);
+      border-radius:12px;padding:13px 16px;margin-bottom:20px}
+    .sumlabel{font-family:var(--fh);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--dim);margin-bottom:10px}
+    .sumpills{display:flex;flex-wrap:wrap;gap:7px}
+    .spill{font-size:.78rem;padding:3px 10px;border-radius:20px;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}
+    .spill.wolf{border-color:rgba(192,57,43,.4);background:rgba(192,57,43,.08)}
+    .spill.err{color:var(--red2)}
 
-    .btn-ghost {
-      background: transparent;
-      color: var(--text-dim);
-      border: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.85rem;
-    }
-    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+    /* ── NAMES ── */
+    .nlist{width:100%;max-width:400px;display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+    .nrow{display:flex;align-items:center;gap:11px;background:var(--surf);
+      border:1px solid var(--border);border-radius:12px;padding:9px 14px}
+    .nnum{font-family:var(--fh);font-size:.75rem;color:var(--dim);width:20px;text-align:center;flex-shrink:0}
+    .ninput{flex:1;background:transparent;border:none;outline:none;color:var(--text);
+      font-family:var(--fb);font-size:1rem;padding:5px 0}
+    .ninput::placeholder{color:#333}
 
-    .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+    /* ── MODE CHOICE ── */
+    .mode-card{
+      width:100%;max-width:400px;background:var(--surf);border:1px solid var(--border);
+      border-radius:16px;padding:20px;cursor:pointer;touch-action:manipulation;
+      transition:border-color .2s,background .2s;margin-bottom:12px;
+      display:flex;align-items:flex-start;gap:14px;
+    }
+    .mode-card:hover,.mode-card:active{border-color:rgba(255,255,255,.15);background:var(--surf2)}
+    .mode-icon{font-size:2rem;flex-shrink:0;margin-top:2px}
+    .mode-title{font-family:var(--fh);font-size:1rem;color:var(--text);margin-bottom:4px}
+    .mode-desc{font-size:.82rem;color:var(--dim);line-height:1.45}
 
-    /* ── COUNTER CONTROL ── */
-    .counter-wrap {
-      width: 100%;
-      max-width: 400px;
-      display: flex;
-      align-items: center;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 18px;
+    /* ── SHARE SCREEN ── */
+    .url-box{
+      width:100%;max-width:400px;background:var(--surf);border:1px solid var(--border);
+      border-radius:12px;padding:14px 16px;margin-bottom:14px;
+      font-family:monospace;font-size:.72rem;color:var(--dim);
+      word-break:break-all;line-height:1.5;cursor:pointer;
+      transition:border-color .2s;position:relative;
     }
+    .url-box:hover,.url-box:active{border-color:rgba(255,255,255,.2)}
+    .url-copy-hint{font-family:var(--fh);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;
+      color:var(--dim);text-align:center;margin-bottom:18px}
+    .copied-badge{
+      position:absolute;top:-10px;right:12px;background:var(--green);color:#fff;
+      font-family:var(--fh);font-size:.6rem;letter-spacing:.1em;padding:3px 10px;
+      border-radius:10px;opacity:0;transition:opacity .3s;pointer-events:none;
+    }
+    .copied-badge.show{opacity:1}
+    .share-step{
+      display:flex;align-items:flex-start;gap:10px;
+      width:100%;max-width:400px;margin-bottom:12px;
+    }
+    .share-step-num{
+      font-family:var(--fh);font-size:.7rem;width:24px;height:24px;
+      border-radius:50%;border:1px solid var(--dim);display:flex;
+      align-items:center;justify-content:center;flex-shrink:0;color:var(--dim);margin-top:1px;
+    }
+    .share-step-text{font-size:.87rem;color:var(--text);line-height:1.45}
+    .share-step-text em{color:var(--dim);font-style:normal}
 
-    .counter-btn {
-      flex-shrink: 0;
-      width: 58px;
-      height: 62px;
-      background: var(--surface2);
-      border: none;
-      color: var(--text);
-      font-size: 1.6rem;
-      cursor: pointer;
-      touch-action: manipulation;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s;
+    /* ── PLAYER LIST ── */
+    .plist{width:100%;max-width:400px;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+    .pcard{
+      display:flex;align-items:center;gap:12px;
+      background:var(--surf);border:1.5px solid var(--border);
+      border-radius:14px;padding:14px 16px;cursor:pointer;touch-action:manipulation;
+      transition:border-color .2s,background .2s;
     }
-    .counter-btn:hover, .counter-btn:active { background: rgba(255,255,255,0.08); }
+    .pcard:hover,.pcard:active{border-color:rgba(255,255,255,.18);background:var(--surf2)}
+    .pcard.seen{opacity:.4;cursor:default;pointer-events:none}
+    .pcard-avatar{
+      width:40px;height:40px;border-radius:50%;background:var(--surf2);
+      border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+      font-family:var(--fh);font-size:1rem;color:var(--dim);flex-shrink:0;
+    }
+    .pcard-name{font-family:var(--fh);font-size:1rem;flex:1}
+    .pcard-badge{font-size:.7rem;color:var(--dim);font-style:italic}
 
-    .counter-center {
-      flex: 1;
-      text-align: center;
-      padding: 0 8px;
+    /* ── CARD FLIP ── */
+    .card-stage{perspective:1100px;margin-bottom:24px}
+    .game-card{
+      width:var(--cw);height:var(--ch);position:relative;
+      transform-style:preserve-3d;
+      transition:transform .65s cubic-bezier(.175,.885,.32,1.275);
+      cursor:pointer;
     }
-    .counter-num {
-      display: block;
-      font-family: var(--font-head);
-      font-size: 2rem;
+    .game-card.flipped{transform:rotateY(180deg);cursor:default}
+    .cface{
+      position:absolute;inset:0;border-radius:18px;
+      backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;
     }
-    .counter-unit {
-      display: block;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-top: -2px;
+    .ccover{
+      background:linear-gradient(160deg,#161636 0%,#0a0a22 100%);
+      border:1.5px solid rgba(120,120,220,.25);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+      box-shadow:0 8px 40px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04);
     }
+    .ccover-inner{position:absolute;inset:9px;border:1px solid rgba(120,120,220,.12);border-radius:12px}
+    .ccover-moon{font-size:3.2rem;filter:drop-shadow(0 0 12px rgba(200,200,255,.4))}
+    .ccover-title{font-family:var(--fh);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;
+      color:rgba(180,180,240,.35);text-align:center;padding:0 18px}
+    .ccover-tap{font-size:.72rem;color:rgba(180,180,240,.25);margin-top:4px;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:.25}50%{opacity:.6}}
+    .crole{
+      transform:rotateY(180deg);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:20px 16px;text-align:center;gap:8px;border:1.5px solid;
+      box-shadow:0 8px 40px rgba(0,0,0,.7);
+    }
+    .crole-icon{font-size:3.8rem;line-height:1}
+    .crole-name{font-family:var(--fh);font-size:1.25rem;font-weight:600;letter-spacing:.05em;line-height:1.2}
+    .crole-team{font-family:var(--fh);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
+      padding:3px 10px;border-radius:20px;background:rgba(0,0,0,.35);border:1px solid currentColor;opacity:.75}
+    .cdivider{width:36px;height:1px;background:rgba(255,255,255,.18)}
+    .cdesc{font-family:var(--fb);font-style:italic;font-size:.76rem;line-height:1.55;color:rgba(255,255,255,.72)}
 
-    /* ── ROLE GRID ── */
-    .roles-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      width: 100%;
-      max-width: 400px;
-      margin-bottom: 18px;
-    }
+    /* reveal screen */
+    .rev-screen{justify-content:flex-start;padding-top:28px}
+    .ptag{font-family:var(--fh);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);text-align:center;margin-bottom:4px}
+    .pbigname{font-family:var(--fh);font-size:1.7rem;color:var(--text);text-align:center;margin-bottom:6px}
+    .rhint{font-family:var(--fb);font-style:italic;font-size:.9rem;color:var(--dim);text-align:center;
+      margin-bottom:22px;min-height:22px}
+    .ractions{display:flex;flex-direction:column;gap:10px;width:100%;max-width:380px;
+      align-items:center;min-height:58px}
 
-    .role-chip {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 11px 13px;
-      border-radius: 12px;
-      border: 1.5px solid var(--border);
-      background: var(--surface);
-      cursor: pointer;
-      touch-action: manipulation;
-      transition: border-color 0.2s, background 0.2s;
-      user-select: none;
-    }
-    .role-chip.on {
-      border-color: var(--gold-dim);
-      background: rgba(241,196,15,0.08);
-    }
-    .role-chip-icon { font-size: 1.35rem; }
-    .role-chip-name { font-size: 0.82rem; flex: 1; line-height: 1.2; }
-    .role-chip-dot {
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,0.18);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.6rem;
-      flex-shrink: 0;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .role-chip.on .role-chip-dot {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #000;
-    }
+    /* progress */
+    .pbar-wrap{width:100%;max-width:380px;margin-top:auto;padding-top:24px}
+    .pbar-track{height:2px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
+    .pbar-fill{height:100%;background:var(--goldd);border-radius:2px;transition:width .5s ease}
+    .pbar-text{font-family:var(--fh);font-size:.6rem;letter-spacing:.15em;color:var(--dim);text-align:right;margin-top:6px}
 
-    /* ── SUMMARY BOX ── */
-    .summary-box {
-      width: 100%;
-      max-width: 400px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 13px 16px;
-      margin-bottom: 20px;
-    }
-    .summary-label {
-      font-family: var(--font-head);
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 10px;
-    }
-    .summary-pills { display: flex; flex-wrap: wrap; gap: 7px; }
-    .summary-pill {
-      font-size: 0.78rem;
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.09);
-    }
-    .summary-pill.wolf { border-color: rgba(192,57,43,0.4); background: rgba(192,57,43,0.08); }
-    .summary-pill.error { color: var(--red-bright); }
+    /* ── DONE ── */
+    .done-screen{justify-content:center;text-align:center;gap:0}
+    .dmoon{font-size:5.5rem;margin-bottom:20px;filter:drop-shadow(0 0 30px rgba(241,196,15,.4));
+      animation:moonrise .8s cubic-bezier(.175,.885,.32,1.275) both}
+    @keyframes moonrise{from{transform:scale(.3) translateY(30px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+    .dtitle{font-family:var(--fh);font-size:1.5rem;color:var(--gold);margin-bottom:8px}
+    .dsub{font-family:var(--fb);font-style:italic;font-size:1rem;color:var(--dim);margin-bottom:40px}
+    .dwolves{font-size:2rem;letter-spacing:10px;margin-bottom:36px}
 
-    /* ── NAME INPUTS ── */
-    .names-list {
-      width: 100%;
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      margin-bottom: 24px;
-    }
-    .name-row {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 9px 14px;
-    }
-    .name-num {
-      font-family: var(--font-head);
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      width: 20px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-    .name-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      padding: 5px 0;
-    }
-    .name-input::placeholder { color: #333; }
-
-    /* ── REVEAL SCREEN ── */
-    .reveal-screen { justify-content: flex-start; padding-top: 28px; }
-
-    .player-tag {
-      font-family: var(--font-head);
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      text-align: center;
-      margin-bottom: 4px;
-    }
-    .player-big-name {
-      font-family: var(--font-head);
-      font-size: 1.7rem;
-      color: var(--text);
-      text-align: center;
-      margin-bottom: 6px;
-      min-height: 2.2rem;
-    }
-    .reveal-hint {
-      font-family: var(--font-body);
-      font-style: italic;
-      font-size: 0.9rem;
-      color: var(--text-dim);
-      text-align: center;
-      margin-bottom: 22px;
-      min-height: 22px;
-      transition: opacity 0.3s;
-    }
-
-    /* Card flip */
-    .card-stage { perspective: 1100px; margin-bottom: 24px; }
-
-    .game-card {
-      width: var(--card-w);
-      height: var(--card-h);
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      cursor: pointer;
-    }
-    .game-card.flipped { transform: rotateY(180deg); cursor: default; }
-
-    .card-face {
-      position: absolute;
-      inset: 0;
-      border-radius: 18px;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      overflow: hidden;
-    }
-
-    /* Back of card */
-    .card-cover {
-      background: linear-gradient(160deg, #161636 0%, #0a0a22 100%);
-      border: 1.5px solid rgba(120,120,220,0.25);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
-    }
-    .card-cover-inner {
-      position: absolute;
-      inset: 9px;
-      border: 1px solid rgba(120,120,220,0.12);
-      border-radius: 12px;
-    }
-    .card-cover-moon { font-size: 3.2rem; filter: drop-shadow(0 0 12px rgba(200,200,255,0.4)); }
-    .card-cover-label {
-      font-family: var(--font-head);
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(180,180,240,0.35);
-      text-align: center;
-      padding: 0 18px;
-    }
-    .card-cover-tap {
-      font-size: 0.72rem;
-      color: rgba(180,180,240,0.25);
-      margin-top: 4px;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100% { opacity: 0.25; } 50% { opacity: 0.6; } }
-
-    /* Front of card (role) */
-    .card-role {
-      transform: rotateY(180deg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px 16px;
-      text-align: center;
-      gap: 8px;
-      border: 1.5px solid;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.7);
-    }
-    .card-role-icon { font-size: 3.8rem; line-height: 1; }
-    .card-role-name {
-      font-family: var(--font-head);
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      line-height: 1.2;
-    }
-    .card-role-team {
-      font-family: var(--font-head);
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: rgba(0,0,0,0.35);
-      border: 1px solid currentColor;
-      opacity: 0.75;
-    }
-    .card-divider { width: 36px; height: 1px; background: rgba(255,255,255,0.18); }
-    .card-desc {
-      font-family: var(--font-body);
-      font-style: italic;
-      font-size: 0.76rem;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.72);
-    }
-
-    .reveal-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-      max-width: 380px;
-      align-items: center;
-      min-height: 58px;
-    }
-
-    /* Progress */
-    .progress-wrap {
-      width: 100%;
-      max-width: 380px;
-      margin-top: auto;
-      padding-top: 24px;
-    }
-    .progress-track {
-      height: 2px;
-      background: rgba(255,255,255,0.07);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      background: var(--gold-dim);
-      border-radius: 2px;
-      transition: width 0.5s ease;
-    }
-    .progress-text {
-      font-family: var(--font-head);
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      color: var(--text-dim);
-      text-align: right;
-      margin-top: 6px;
-    }
-
-    /* ── DONE SCREEN ── */
-    .done-screen { justify-content: center; text-align: center; gap: 0; }
-    .done-moon {
-      font-size: 5.5rem;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 0 30px rgba(241,196,15,0.4));
-      animation: moonrise 0.8s cubic-bezier(0.175,0.885,0.32,1.275) both;
-    }
-    @keyframes moonrise {
-      from { transform: scale(0.3) translateY(30px); opacity: 0; }
-      to   { transform: scale(1) translateY(0); opacity: 1; }
-    }
-    .done-title {
-      font-family: var(--font-head);
-      font-size: 1.5rem;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-    .done-sub {
-      font-family: var(--font-body);
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--text-dim);
-      margin-bottom: 40px;
-    }
-    .done-wolves { font-size: 2rem; letter-spacing: 10px; margin-bottom: 36px; }
-
-    /* ── UTILS ── */
-    .gap-sm { height: 10px; }
-    .gap-md { height: 18px; }
-    .w-full { width: 100%; max-width: 400px; }
-    .divider {
-      width: 100%;
-      max-width: 400px;
-      height: 1px;
-      background: var(--border);
-      margin: 6px 0 18px;
-    }
-
-    /* Scrollable setup */
-    .setup-scroll {
-      width: 100%;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow-y: auto;
-      padding-bottom: 8px;
-    }
+    /* util */
+    .divider{width:100%;max-width:400px;height:1px;background:var(--border);margin:6px 0 18px}
+    .setup-scroll{width:100%;flex:1;display:flex;flex-direction:column;align-items:center;
+      overflow-y:auto;padding-bottom:8px}
   </style>
 </head>
 <body>
 <div id="app"></div>
 <script>
-/* ────────────────────────────────────────────────
-   ROLE DATA
-──────────────────────────────────────────────── */
+/* ══════════════════════════════════════════
+   ROLES
+══════════════════════════════════════════ */
 const ROLES = {
-  lobo: {
-    id: 'lobo', name: 'Hombre Lobo', icon: '🐺',
-    teamLabel: 'Bando de los Lobos',
-    color: '#e74c3c',
-    bg: 'linear-gradient(160deg, #1c0000 0%, #3a0000 100%)',
-    border: '#8b1a1a',
-    desc: 'Cada noche, junto al resto de lobos, elegís en silencio a vuestra víctima. Ganáis si igualáis o superáis en número a los aldeanos.',
-  },
-  aldeano: {
-    id: 'aldeano', name: 'Aldeano', icon: '🏘️',
-    teamLabel: 'Bando de la Aldea',
-    color: '#2ecc71',
-    bg: 'linear-gradient(160deg, #001c00 0%, #003a00 100%)',
-    border: '#1a5c2a',
-    desc: 'Habitante honesto del pueblo. Debate y vota durante el día para eliminar sospechosos. Gana si todos los lobos son eliminados.',
-  },
-  vidente: {
-    id: 'vidente', name: 'Vidente', icon: '🔮',
-    teamLabel: 'Bando de la Aldea',
-    color: '#9b59b6',
-    bg: 'linear-gradient(160deg, #0e0022 0%, #280050 100%)',
-    border: '#6a0dad',
-    desc: 'Cada noche señalas en secreto a un jugador. El narrador te revela si es Lobo o no. Usa esa información con astucia.',
-    special: true,
-  },
-  bruja: {
-    id: 'bruja', name: 'Bruja', icon: '🧪',
-    teamLabel: 'Bando de la Aldea',
-    color: '#e056b2',
-    bg: 'linear-gradient(160deg, #1c0025 0%, #3a0050 100%)',
-    border: '#9b1aaa',
-    desc: 'Tienes dos pociones: una de vida (salva a la víctima de esta noche) y una de muerte (elimina a cualquier jugador). Cada una se usa una sola vez en toda la partida.',
-    special: true,
-  },
-  cazador: {
-    id: 'cazador', name: 'Cazador', icon: '🎯',
-    teamLabel: 'Bando de la Aldea',
-    color: '#e67e22',
-    bg: 'linear-gradient(160deg, #1c0a00 0%, #3a1500 100%)',
-    border: '#8b4513',
-    desc: 'Si eres eliminado (de día o de noche), antes de morir disparas a otro jugador de tu elección. Esa persona también muere.',
-    special: true,
-  },
-  cupido: {
-    id: 'cupido', name: 'Cupido', icon: '💘',
-    teamLabel: 'Rol Especial',
-    color: '#e91e8c',
-    bg: 'linear-gradient(160deg, #1c0015 0%, #3a0030 100%)',
-    border: '#c0396b',
-    desc: 'La primera noche, unes a dos jugadores en amor eterno (puedes elegirte a ti mismo). Si uno muere, el otro muere de pena. Los enamorados ganan si son los últimos supervivientes.',
-    special: true,
-  },
-  nina: {
-    id: 'nina', name: 'Niña', icon: '👁️',
-    teamLabel: 'Bando de la Aldea',
-    color: '#3498db',
-    bg: 'linear-gradient(160deg, #00001c 0%, #00003a 100%)',
-    border: '#1565c0',
-    desc: 'Durante la noche de los lobos puedes entornar los ojos e intentar espiarles. Si los lobos te ven, podrían convertirte en su próxima víctima.',
-    special: true,
-  },
-  ladron: {
-    id: 'ladron', name: 'Ladrón', icon: '🃏',
-    teamLabel: 'Rol Especial',
-    color: '#95a5a6',
-    bg: 'linear-gradient(160deg, #0d0d0d 0%, #222 100%)',
-    border: '#546e7a',
-    desc: 'Al inicio se colocan 2 cartas extra boca abajo. Puedes robar una de ellas y asumir ese rol, o quedarte como Ladrón (equivale a Aldeano). Eliges la primera noche.',
-    special: true,
-  },
+  lobo:{id:'lobo',name:'Hombre Lobo',icon:'🐺',teamLabel:'Bando de los Lobos',
+    color:'#e74c3c',bg:'linear-gradient(160deg,#1c0000 0%,#3a0000 100%)',border:'#8b1a1a',
+    desc:'Cada noche, junto al resto de lobos, elegís en silencio a vuestra víctima. Ganáis si igualáis o superáis en número a los aldeanos.'},
+  aldeano:{id:'aldeano',name:'Aldeano',icon:'🏘️',teamLabel:'Bando de la Aldea',
+    color:'#2ecc71',bg:'linear-gradient(160deg,#001c00 0%,#003a00 100%)',border:'#1a5c2a',
+    desc:'Habitante honesto del pueblo. Debate y vota durante el día para eliminar sospechosos. Gana si todos los lobos son eliminados.'},
+  vidente:{id:'vidente',name:'Vidente',icon:'🔮',teamLabel:'Bando de la Aldea',special:true,
+    color:'#9b59b6',bg:'linear-gradient(160deg,#0e0022 0%,#280050 100%)',border:'#6a0dad',
+    desc:'Cada noche señalas en secreto a un jugador. El narrador te revela si es Lobo o no. Usa esa información con astucia.'},
+  bruja:{id:'bruja',name:'Bruja',icon:'🧪',teamLabel:'Bando de la Aldea',special:true,
+    color:'#e056b2',bg:'linear-gradient(160deg,#1c0025 0%,#3a0050 100%)',border:'#9b1aaa',
+    desc:'Tienes dos pociones: una de vida (salva a la víctima de esta noche) y una de muerte (elimina a cualquier jugador). Cada una se usa una sola vez.'},
+  cazador:{id:'cazador',name:'Cazador',icon:'🎯',teamLabel:'Bando de la Aldea',special:true,
+    color:'#e67e22',bg:'linear-gradient(160deg,#1c0a00 0%,#3a1500 100%)',border:'#8b4513',
+    desc:'Si eres eliminado (de día o de noche), antes de morir disparas a otro jugador de tu elección. Esa persona también muere.'},
+  cupido:{id:'cupido',name:'Cupido',icon:'💘',teamLabel:'Rol Especial',special:true,
+    color:'#e91e8c',bg:'linear-gradient(160deg,#1c0015 0%,#3a0030 100%)',border:'#c0396b',
+    desc:'La primera noche, unes a dos jugadores en amor eterno. Si uno muere, el otro muere de pena. Los enamorados ganan si son los últimos supervivientes.'},
+  nina:{id:'nina',name:'Niña',icon:'👁️',teamLabel:'Bando de la Aldea',special:true,
+    color:'#3498db',bg:'linear-gradient(160deg,#00001c 0%,#00003a 100%)',border:'#1565c0',
+    desc:'Durante la noche de los lobos puedes entornar los ojos e intentar espiarles. Si los lobos te detectan, podrías ser su próxima víctima.'},
+  ladron:{id:'ladron',name:'Ladrón',icon:'🃏',teamLabel:'Rol Especial',special:true,
+    color:'#95a5a6',bg:'linear-gradient(160deg,#0d0d0d 0%,#222 100%)',border:'#546e7a',
+    desc:'Al inicio se colocan 2 cartas extra boca abajo. Puedes robar una de ellas y asumir ese rol, o quedarte como Ladrón (equivale a Aldeano).'},
 };
+const SPECIAL_IDS = ['vidente','bruja','cazador','cupido','nina','ladron'];
 
-const SPECIAL_IDS = ['vidente', 'bruja', 'cazador', 'cupido', 'nina', 'ladron'];
-
-/* ────────────────────────────────────────────────
+/* ══════════════════════════════════════════
    STATE
-──────────────────────────────────────────────── */
+══════════════════════════════════════════ */
 let S = {
-  screen:       'setup',
-  playerCount:  6,
-  wolfCount:    2,
-  specials:     ['vidente'],
-  names:        [],
-  deck:         [],
-  idx:          0,
-  cardPhase:    'waiting',  // waiting | revealed | hidden
+  screen:'setup',
+  playerCount:6, wolfCount:2, specials:['vidente'],
+  names:[], deck:[],
+  // local (pass-phone) mode
+  idx:0, cardPhase:'waiting',
+  // shared mode
+  shareUrl:'',
+  // player view (opened from link)
+  gameData:null, chosenIdx:null, cardPhaseP:'waiting',
 };
 
-/* ────────────────────────────────────────────────
-   HELPERS
-──────────────────────────────────────────────── */
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
+/* ══════════════════════════════════════════
+   UTILS
+══════════════════════════════════════════ */
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
   return a;
 }
-
-function villagers() { return S.playerCount - S.wolfCount - S.specials.length; }
-function valid()     { return villagers() >= 0 && S.wolfCount >= 1; }
-
-function buildDeck() {
-  const d = [];
-  for (let i = 0; i < S.wolfCount; i++) d.push('lobo');
-  S.specials.forEach(r => d.push(r));
-  for (let i = 0; i < villagers(); i++) d.push('aldeano');
+function villagers(){return S.playerCount-S.wolfCount-S.specials.length}
+function valid(){return villagers()>=0&&S.wolfCount>=1}
+function buildDeck(){
+  const d=[];
+  for(let i=0;i<S.wolfCount;i++)d.push('lobo');
+  S.specials.forEach(r=>d.push(r));
+  for(let i=0;i<villagers();i++)d.push('aldeano');
   return shuffle(d);
 }
+function pname(i){const n=S.names[i];return(n&&n.trim())?n.trim():`Jugador ${i+1}`}
 
-function playerName(i) {
-  const n = S.names[i];
-  return (n && n.trim()) ? n.trim() : `Jugador ${i + 1}`;
+function encodeGame(players){
+  try{return btoa(unescape(encodeURIComponent(JSON.stringify({v:1,p:players}))))}
+  catch(e){return btoa(JSON.stringify({v:1,p:players}))}
+}
+function decodeGame(str){
+  try{return JSON.parse(decodeURIComponent(escape(atob(str))))}
+  catch(e){try{return JSON.parse(atob(str))}catch(e2){return null}}
 }
 
-/* ────────────────────────────────────────────────
-   ACTIONS (exposed to onclick)
-──────────────────────────────────────────────── */
-function adjustPlayers(d) {
-  S.playerCount = Math.max(4, Math.min(20, S.playerCount + d));
-  const maxW = Math.max(1, S.playerCount - S.specials.length - 1);
-  if (S.wolfCount > maxW) S.wolfCount = maxW;
+function getSeenKey(encoded){return 'hlc_seen_'+encoded.slice(0,16)}
+function getSeenSet(encoded){
+  try{return new Set(JSON.parse(localStorage.getItem(getSeenKey(encoded))||'[]'))}
+  catch(e){return new Set()}
+}
+function markSeen(encoded,idx){
+  const s=getSeenSet(encoded);s.add(idx);
+  try{localStorage.setItem(getSeenKey(encoded),JSON.stringify([...s]))}catch(e){}
+}
+
+/* ══════════════════════════════════════════
+   ACTIONS
+══════════════════════════════════════════ */
+function adjustPlayers(d){
+  S.playerCount=Math.max(4,Math.min(20,S.playerCount+d));
+  const mx=Math.max(1,S.playerCount-S.specials.length-1);
+  if(S.wolfCount>mx)S.wolfCount=mx;
   render();
 }
-
-function adjustWolves(d) {
-  const max = Math.max(1, S.playerCount - S.specials.length - 1);
-  S.wolfCount = Math.max(1, Math.min(max, S.wolfCount + d));
+function adjustWolves(d){
+  const mx=Math.max(1,S.playerCount-S.specials.length-1);
+  S.wolfCount=Math.max(1,Math.min(mx,S.wolfCount+d));
   render();
 }
-
-function toggleRole(id) {
-  const i = S.specials.indexOf(id);
-  if (i === -1) { S.specials.push(id); }
-  else          { S.specials.splice(i, 1); }
-  const maxW = Math.max(1, S.playerCount - S.specials.length - 1);
-  if (S.wolfCount > maxW) S.wolfCount = maxW;
+function toggleRole(id){
+  const i=S.specials.indexOf(id);
+  if(i===-1)S.specials.push(id);else S.specials.splice(i,1);
+  const mx=Math.max(1,S.playerCount-S.specials.length-1);
+  if(S.wolfCount>mx)S.wolfCount=mx;
   render();
 }
-
-function goNames() {
-  if (!valid()) return;
-  while (S.names.length < S.playerCount) S.names.push('');
-  S.names = S.names.slice(0, S.playerCount);
-  S.screen = 'names';
-  render();
+function goNames(){
+  if(!valid())return;
+  while(S.names.length<S.playerCount)S.names.push('');
+  S.names=S.names.slice(0,S.playerCount);
+  S.screen='names';render();
 }
+function updateName(i,v){S.names[i]=v}
+function goSetup(){S.screen='setup';render()}
+function goModeChoice(){S.screen='mode';render()}
 
-function updateName(i, v) { S.names[i] = v; }
-
-function startDeal() {
-  S.deck      = buildDeck();
-  S.idx       = 0;
-  S.cardPhase = 'waiting';
-  S.screen    = 'reveal';
-  render();
+// ── LOCAL (pass phone) ──
+function startLocal(){
+  S.deck=buildDeck();S.idx=0;S.cardPhase='waiting';S.screen='local';render();
 }
-
-function revealCard() {
-  if (S.cardPhase !== 'waiting') return;
-  S.cardPhase = 'revealed';
-  const card = document.getElementById('gc');
-  if (card) card.classList.add('flipped');
-  _updateRevealUI();
+function revealLocal(){
+  if(S.cardPhase!=='waiting')return;
+  S.cardPhase='revealed';
+  const c=document.getElementById('gc');if(c)c.classList.add('flipped');
+  _updateLocalUI();
 }
-
-function hideCard() {
-  S.cardPhase = 'hidden';
-  const card = document.getElementById('gc');
-  if (card) card.classList.remove('flipped');
-  setTimeout(_updateRevealUI, 420);
+function hideLocal(){
+  S.cardPhase='hidden';
+  const c=document.getElementById('gc');if(c)c.classList.remove('flipped');
+  setTimeout(_updateLocalUI,420);
 }
-
-function nextPlayer() {
-  if (S.idx >= S.playerCount - 1) { S.screen = 'done'; render(); return; }
-  S.idx++;
-  S.cardPhase = 'waiting';
-  render();
+function nextPlayer(){
+  if(S.idx>=S.playerCount-1){S.screen='done';render();return}
+  S.idx++;S.cardPhase='waiting';render();
 }
-
-function newGame() {
-  S = {
-    screen: 'setup',
-    playerCount: S.playerCount,
-    wolfCount:   S.wolfCount,
-    specials:    [...S.specials],
-    names:       [],
-    deck:        [],
-    idx:         0,
-    cardPhase:   'waiting',
-  };
-  render();
-}
-
-function _updateRevealUI() {
-  const hint    = document.getElementById('hint');
-  const actions = document.getElementById('actions');
-  if (!hint || !actions) return;
-  const last = S.idx === S.playerCount - 1;
-  if (S.cardPhase === 'revealed') {
-    hint.textContent = '¡No muestres tu carta a nadie!';
-    actions.innerHTML = `<button class="btn btn-ghost w-full" onclick="hideCard()">Ocultar carta</button>`;
-  } else if (S.cardPhase === 'hidden') {
-    hint.textContent = 'Carta oculta. Pasa el dispositivo.';
-    actions.innerHTML = `<button class="btn ${last ? 'btn-success' : 'btn-primary'} w-full" onclick="nextPlayer()">
-      ${last ? '¡Empezar la partida! 🐺' : 'Siguiente jugador →'}
-    </button>`;
+function _updateLocalUI(){
+  const hint=document.getElementById('hint');
+  const acts=document.getElementById('acts');
+  if(!hint||!acts)return;
+  const last=S.idx===S.playerCount-1;
+  if(S.cardPhase==='revealed'){
+    hint.textContent='¡No muestres tu carta a nadie!';
+    acts.innerHTML=`<button class="btn btn-ghost w400" onclick="hideLocal()">Ocultar carta</button>`;
+  }else if(S.cardPhase==='hidden'){
+    hint.textContent='Carta oculta. Pasa el dispositivo.';
+    acts.innerHTML=`<button class="btn ${last?'btn-success':'btn-primary'} w400" onclick="nextPlayer()">
+      ${last?'¡Empezar la partida! 🐺':'Siguiente jugador →'}</button>`;
   }
 }
 
-/* ────────────────────────────────────────────────
+// ── SHARED ──
+function startShare(){
+  const deck=buildDeck();
+  const players=deck.map((r,i)=>({n:pname(i),r}));
+  const encoded=encodeGame(players);
+  const base=location.origin+location.pathname;
+  S.shareUrl=base+'#g='+encoded;
+  S.screen='share';render();
+}
+function copyUrl(){
+  navigator.clipboard&&navigator.clipboard.writeText(S.shareUrl).then(()=>{
+    const badge=document.getElementById('cbadge');
+    if(badge){badge.classList.add('show');setTimeout(()=>badge.classList.remove('show'),2000);}
+  }).catch(()=>_fallbackCopy());
+  if(!navigator.clipboard)_fallbackCopy();
+}
+function _fallbackCopy(){
+  const ta=document.createElement('textarea');
+  ta.value=S.shareUrl;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy')}catch(e){}
+  document.body.removeChild(ta);
+  const badge=document.getElementById('cbadge');
+  if(badge){badge.classList.add('show');setTimeout(()=>badge.classList.remove('show'),2000);}
+}
+function doShare(){
+  if(navigator.share){
+    navigator.share({title:'Hombres Lobo de Castronegro',text:'¡Abre este enlace para ver tu carta!',url:S.shareUrl})
+    .catch(()=>{});
+  }else{copyUrl();}
+}
+
+// ── PLAYER VIEW ──
+function choosePlayer(idx){
+  S.chosenIdx=idx;S.cardPhaseP='waiting';S.screen='reveal-player';render();
+}
+function revealPlayer(){
+  if(S.cardPhaseP!=='waiting')return;
+  S.cardPhaseP='revealed';
+  const c=document.getElementById('gcp');if(c)c.classList.add('flipped');
+  _updatePlayerUI();
+}
+function hidePlayer(){
+  // mark as seen in localStorage
+  const hash=location.hash.slice(3);
+  markSeen(hash,S.chosenIdx);
+  S.cardPhaseP='hidden';
+  const c=document.getElementById('gcp');if(c)c.classList.remove('flipped');
+  setTimeout(()=>{S.screen='player-list';render();},450);
+}
+function _updatePlayerUI(){
+  const hint=document.getElementById('hintp');
+  const acts=document.getElementById('actsp');
+  if(!hint||!acts)return;
+  if(S.cardPhaseP==='revealed'){
+    hint.textContent='¡No muestres tu carta a nadie!';
+    acts.innerHTML=`<button class="btn btn-ghost w400" onclick="hidePlayer()">Ocultar y cerrar</button>`;
+  }
+}
+function newGame(){
+  S={screen:'setup',playerCount:S.playerCount,wolfCount:S.wolfCount,
+    specials:[...S.specials],names:[],deck:[],idx:0,cardPhase:'waiting',
+    shareUrl:'',gameData:null,chosenIdx:null,cardPhaseP:'waiting'};
+  history.replaceState(null,'',location.pathname);
+  render();
+}
+
+/* ══════════════════════════════════════════
    RENDERERS
-──────────────────────────────────────────────── */
-function renderSetup() {
-  const v   = villagers();
-  const ok  = valid();
-
-  const pills = ok
-    ? `<span class="summary-pill wolf">🐺 ${S.wolfCount} ${S.wolfCount === 1 ? 'Lobo' : 'Lobos'}</span>
-       ${S.specials.map(r => `<span class="summary-pill">${ROLES[r].icon} ${ROLES[r].name}</span>`).join('')}
-       ${v > 0 ? `<span class="summary-pill">🏘️ ${v} ${v === 1 ? 'Aldeano' : 'Aldeanos'}</span>` : ''}`
-    : `<span class="summary-pill error">⚠️ Demasiados roles para ${S.playerCount} jugadores</span>`;
-
-  return `
-  <div class="screen">
+══════════════════════════════════════════ */
+function renderSetup(){
+  const v=villagers(),ok=valid();
+  const pills=ok
+    ?`<span class="spill wolf">🐺 ${S.wolfCount} ${S.wolfCount===1?'Lobo':'Lobos'}</span>
+      ${S.specials.map(r=>`<span class="spill">${ROLES[r].icon} ${ROLES[r].name}</span>`).join('')}
+      ${v>0?`<span class="spill">🏘️ ${v} ${v===1?'Aldeano':'Aldeanos'}</span>`:''}`
+    :`<span class="spill err">⚠️ Demasiados roles para ${S.playerCount} jugadores</span>`;
+  return`<div class="screen">
     <div style="font-size:4rem;margin:8px 0 6px;filter:drop-shadow(0 0 18px rgba(192,57,43,.55))">🐺</div>
-    <h1 class="heading">Hombres Lobo</h1>
-    <p class="subheading">de Castronegro</p>
-
+    <h1 class="heading">Hombres Lobo</h1><p class="subhead">de Castronegro</p>
     <div class="setup-scroll">
-      <div class="section-label">Número de jugadores</div>
-      <div class="counter-wrap">
-        <button class="counter-btn" onclick="adjustPlayers(-1)">−</button>
-        <div class="counter-center">
-          <span class="counter-num">${S.playerCount}</span>
-          <span class="counter-unit">jugadores</span>
-        </div>
-        <button class="counter-btn" onclick="adjustPlayers(1)">+</button>
+      <div class="sec-label">Número de jugadores</div>
+      <div class="counter"><button class="cbtn" onclick="adjustPlayers(-1)">−</button>
+        <div class="ccenter"><span class="cnum">${S.playerCount}</span><span class="cunit">jugadores</span></div>
+        <button class="cbtn" onclick="adjustPlayers(1)">+</button></div>
+      <div class="sec-label">Hombres Lobo</div>
+      <div class="counter"><button class="cbtn" style="color:var(--red)" onclick="adjustWolves(-1)">−</button>
+        <div class="ccenter"><span class="cnum" style="color:var(--red)">${S.wolfCount}</span><span class="cunit">lobos</span></div>
+        <button class="cbtn" style="color:var(--red)" onclick="adjustWolves(1)">+</button></div>
+      <div class="sec-label">Roles especiales</div>
+      <div class="rgrid">
+        ${SPECIAL_IDS.map(id=>{const r=ROLES[id],sel=S.specials.includes(id);
+          return`<div class="rchip ${sel?'on':''}" onclick="toggleRole('${id}')">
+            <span class="rchip-icon">${r.icon}</span>
+            <span class="rchip-name">${r.name}</span>
+            <span class="rchip-dot">${sel?'✓':''}</span></div>`;}).join('')}
       </div>
-
-      <div class="section-label">Hombres Lobo</div>
-      <div class="counter-wrap">
-        <button class="counter-btn" style="color:var(--red)" onclick="adjustWolves(-1)">−</button>
-        <div class="counter-center">
-          <span class="counter-num" style="color:var(--red)">${S.wolfCount}</span>
-          <span class="counter-unit">lobos</span>
-        </div>
-        <button class="counter-btn" style="color:var(--red)" onclick="adjustWolves(1)">+</button>
-      </div>
-
-      <div class="section-label">Roles especiales</div>
-      <div class="roles-grid">
-        ${SPECIAL_IDS.map(id => {
-          const r   = ROLES[id];
-          const sel = S.specials.includes(id);
-          return `<div class="role-chip ${sel ? 'on' : ''}" onclick="toggleRole('${id}')">
-            <span class="role-chip-icon">${r.icon}</span>
-            <span class="role-chip-name">${r.name}</span>
-            <span class="role-chip-dot">${sel ? '✓' : ''}</span>
-          </div>`;
-        }).join('')}
-      </div>
-
-      <div class="summary-box">
-        <div class="summary-label">Reparto de cartas</div>
-        <div class="summary-pills">${pills}</div>
-      </div>
-
-      <button class="btn btn-primary w-full" onclick="goNames()" ${ok ? '' : 'disabled'}>
-        Continuar →
-      </button>
-    </div>
-  </div>`;
+      <div class="sumbox"><div class="sumlabel">Reparto de cartas</div>
+        <div class="sumpills">${pills}</div></div>
+      <button class="btn btn-primary w400" onclick="goNames()" ${ok?'':'disabled'}>Continuar →</button>
+    </div></div>`;
 }
 
-function renderNames() {
-  const rows = Array.from({length: S.playerCount}, (_, i) => `
-    <div class="name-row">
-      <span class="name-num">${i + 1}</span>
-      <input class="name-input" type="text" placeholder="Jugador ${i + 1}"
-        value="${S.names[i] || ''}" maxlength="20"
-        oninput="updateName(${i}, this.value)">
-    </div>`).join('');
-
-  return `
-  <div class="screen">
+function renderNames(){
+  const rows=Array.from({length:S.playerCount},(_,i)=>`
+    <div class="nrow"><span class="nnum">${i+1}</span>
+      <input class="ninput" type="text" placeholder="Jugador ${i+1}"
+        value="${S.names[i]||''}" maxlength="20" oninput="updateName(${i},this.value)"></div>`).join('');
+  return`<div class="screen">
     <h1 class="heading" style="margin-top:8px">Nombres</h1>
-    <p class="subheading">opcional — deja en blanco para usar números</p>
-    <div class="names-list">${rows}</div>
-    <button class="btn btn-primary w-full" onclick="startDeal()" style="margin-bottom:11px">
-      ¡Repartir cartas!
-    </button>
-    <button class="btn btn-ghost w-full" onclick="goSetup()">← Volver</button>
+    <p class="subhead">opcional — puedes dejar en blanco</p>
+    <div class="nlist">${rows}</div>
+    <button class="btn btn-primary w400" onclick="goModeChoice()" style="margin-bottom:11px">Continuar →</button>
+    <button class="btn btn-ghost w400" onclick="goSetup()">← Volver</button>
   </div>`;
 }
 
-function goSetup() { S.screen = 'setup'; render(); }
+function renderMode(){
+  return`<div class="screen">
+    <h1 class="heading" style="margin-top:8px">¿Cómo jugáis?</h1>
+    <p class="subhead">elige el modo de reparto</p>
+    <div style="height:8px"></div>
+    <div class="mode-card" onclick="startShare()">
+      <div class="mode-icon">📲</div>
+      <div><div class="mode-title">Cada uno en su móvil</div>
+        <div class="mode-desc">Se genera un enlace. Lo compartís en el grupo de WhatsApp/Telegram y cada jugador abre el enlace en su propio móvil para ver su carta.</div></div>
+    </div>
+    <div class="mode-card" onclick="startLocal()">
+      <div class="mode-icon">🤝</div>
+      <div><div class="mode-title">Pasar el móvil</div>
+        <div class="mode-desc">Las cartas se reparten de uno en uno pasando este dispositivo. Cada jugador toca para ver su carta en privado.</div></div>
+    </div>
+    <div style="height:8px"></div>
+    <button class="btn btn-ghost w400" onclick="goNames()">← Volver</button>
+  </div>`;
+}
 
-function renderReveal() {
-  const i      = S.idx;
-  const name   = playerName(i);
-  const roleId = S.deck[i];
-  const role   = ROLES[roleId];
-  const pct    = Math.round((i / S.playerCount) * 100);
+function renderShare(){
+  const url=S.shareUrl;
+  const canShare=!!navigator.share;
+  return`<div class="screen">
+    <div style="font-size:3rem;margin:8px 0 8px">📲</div>
+    <h1 class="heading">Compartir partida</h1>
+    <p class="subhead">envía el enlace a todos los jugadores</p>
 
-  const hint    = S.cardPhase === 'waiting'
-    ? 'Toca la carta para ver tu rol'
-    : S.cardPhase === 'revealed'
-      ? '¡No muestres tu carta a nadie!'
-      : 'Carta oculta. Pasa el dispositivo.';
+    <div class="share-step">
+      <div class="share-step-num">1</div>
+      <div class="share-step-text">Copia o comparte el enlace con el grupo</div>
+    </div>
+    <div class="share-step">
+      <div class="share-step-num">2</div>
+      <div class="share-step-text">Cada jugador lo abre en su móvil y toca su nombre</div>
+    </div>
+    <div class="share-step" style="margin-bottom:20px">
+      <div class="share-step-num">3</div>
+      <div class="share-step-text">Cada uno ve <em>solo su propia carta</em> — nadie puede ver la de otro</div>
+    </div>
 
-  const isLast = i === S.playerCount - 1;
-  let actionsHtml = '';
-  if (S.cardPhase === 'revealed') {
-    actionsHtml = `<button class="btn btn-ghost w-full" onclick="hideCard()">Ocultar carta</button>`;
-  } else if (S.cardPhase === 'hidden') {
-    actionsHtml = `<button class="btn ${isLast ? 'btn-success' : 'btn-primary'} w-full" onclick="nextPlayer()">
-      ${isLast ? '¡Empezar la partida! 🐺' : 'Siguiente jugador →'}
-    </button>`;
-  }
+    <div class="url-box w400" onclick="copyUrl()">
+      <span id="cbadge" class="copied-badge">¡Copiado!</span>
+      ${url}
+    </div>
+    <div class="url-copy-hint">toca el enlace para copiar</div>
 
-  return `
-  <div class="screen reveal-screen">
-    <div class="player-tag">Turno de</div>
-    <div class="player-big-name">${name}</div>
-    <div class="reveal-hint" id="hint">${hint}</div>
+    ${canShare
+      ?`<button class="btn btn-primary w400" onclick="doShare()" style="margin-bottom:11px">Compartir →</button>`
+      :`<button class="btn btn-primary w400" onclick="copyUrl()" style="margin-bottom:11px">📋 Copiar enlace</button>`
+    }
+    <button class="btn btn-ghost w400" style="margin-bottom:11px" onclick="openLocalFromShare()">
+      Jugar también en este dispositivo
+    </button>
+    <button class="btn btn-ghost w400" onclick="goModeChoice()">← Volver</button>
+  </div>`;
+}
 
+function openLocalFromShare(){
+  // Navigate to the game link on this same device
+  location.href=S.shareUrl;
+}
+
+function renderPlayerList(){
+  const gd=S.gameData;
+  const hash=location.hash.slice(3);
+  const seen=getSeenSet(hash);
+  const items=gd.p.map((p,i)=>{
+    const isSeen=seen.has(i);
+    return`<div class="pcard ${isSeen?'seen':''}" onclick="${isSeen?'':'choosePlayer('+i+')'}">
+      <div class="pcard-avatar">${p.n.charAt(0).toUpperCase()||'?'}</div>
+      <div class="pcard-name">${p.n}</div>
+      ${isSeen?'<div class="pcard-badge">ya vista ✓</div>':'<div class="pcard-badge">toca para revelar</div>'}
+    </div>`;}).join('');
+  return`<div class="screen">
+    <div style="font-size:3rem;margin:8px 0 6px">🌕</div>
+    <h1 class="heading">¿Quién eres?</h1>
+    <p class="subhead">toca tu nombre para ver tu carta</p>
+    <div class="plist">${items}</div>
+  </div>`;
+}
+
+function renderRevealPlayer(){
+  const gd=S.gameData;
+  const p=gd.p[S.chosenIdx];
+  const role=ROLES[p.r];
+  const isFlipped=S.cardPhaseP==='revealed';
+  const hint=S.cardPhaseP==='waiting'?'Toca la carta para ver tu rol':'¡No muestres tu carta a nadie!';
+  const acts=S.cardPhaseP==='revealed'
+    ?`<button class="btn btn-ghost w400" onclick="hidePlayer()">Ocultar y cerrar</button>`:'';
+  return`<div class="screen rev-screen">
+    <div class="ptag">Carta de</div>
+    <div class="pbigname">${p.n}</div>
+    <div class="rhint" id="hintp">${hint}</div>
     <div class="card-stage">
-      <div class="game-card ${S.cardPhase === 'revealed' ? 'flipped' : ''}"
-           id="gc" onclick="revealCard()">
-
-        <div class="card-face card-cover">
-          <div class="card-cover-inner"></div>
-          <div class="card-cover-moon">🌕</div>
-          <div class="card-cover-label">Hombres Lobo<br>de Castronegro</div>
-          <div class="card-cover-tap">✦ toca para revelar ✦</div>
+      <div class="game-card ${isFlipped?'flipped':''}" id="gcp" onclick="revealPlayer()">
+        <div class="cface ccover">
+          <div class="ccover-inner"></div>
+          <div class="ccover-moon">🌕</div>
+          <div class="ccover-title">Hombres Lobo<br>de Castronegro</div>
+          <div class="ccover-tap">✦ toca para revelar ✦</div>
         </div>
-
-        <div class="card-face card-role"
-             style="background:${role.bg};border-color:${role.border};color:${role.color}">
-          <div class="card-role-icon">${role.icon}</div>
-          <div class="card-role-name">${role.name}</div>
-          <div class="card-role-team" style="border-color:${role.color}">${role.teamLabel}</div>
-          <div class="card-divider"></div>
-          <div class="card-desc">${role.desc}</div>
+        <div class="cface crole" style="background:${role.bg};border-color:${role.border};color:${role.color}">
+          <div class="crole-icon">${role.icon}</div>
+          <div class="crole-name">${role.name}</div>
+          <div class="crole-team" style="border-color:${role.color}">${role.teamLabel}</div>
+          <div class="cdivider"></div>
+          <div class="cdesc">${role.desc}</div>
         </div>
       </div>
     </div>
+    <div class="ractions" id="actsp">${acts}</div>
+  </div>`;
+}
 
-    <div class="reveal-actions" id="actions">${actionsHtml}</div>
-
-    <div class="progress-wrap">
-      <div class="progress-track">
-        <div class="progress-fill" style="width:${pct}%"></div>
+function renderLocal(){
+  const i=S.idx,name=pname(i),role=ROLES[S.deck[i]];
+  const isFlipped=S.cardPhase==='revealed';
+  const pct=Math.round((i/S.playerCount)*100);
+  const hint=S.cardPhase==='waiting'?'Toca la carta para ver tu rol'
+    :S.cardPhase==='revealed'?'¡No muestres tu carta a nadie!'
+    :'Carta oculta. Pasa el dispositivo.';
+  const last=i===S.playerCount-1;
+  let acts='';
+  if(S.cardPhase==='revealed')acts=`<button class="btn btn-ghost w400" onclick="hideLocal()">Ocultar carta</button>`;
+  else if(S.cardPhase==='hidden')acts=`<button class="btn ${last?'btn-success':'btn-primary'} w400" onclick="nextPlayer()">
+    ${last?'¡Empezar la partida! 🐺':'Siguiente jugador →'}</button>`;
+  return`<div class="screen rev-screen">
+    <div class="ptag">Turno de</div>
+    <div class="pbigname">${name}</div>
+    <div class="rhint" id="hint">${hint}</div>
+    <div class="card-stage">
+      <div class="game-card ${isFlipped?'flipped':''}" id="gc" onclick="revealLocal()">
+        <div class="cface ccover">
+          <div class="ccover-inner"></div>
+          <div class="ccover-moon">🌕</div>
+          <div class="ccover-title">Hombres Lobo<br>de Castronegro</div>
+          <div class="ccover-tap">✦ toca para revelar ✦</div>
+        </div>
+        <div class="cface crole" style="background:${role.bg};border-color:${role.border};color:${role.color}">
+          <div class="crole-icon">${role.icon}</div>
+          <div class="crole-name">${role.name}</div>
+          <div class="crole-team" style="border-color:${role.color}">${role.teamLabel}</div>
+          <div class="cdivider"></div>
+          <div class="cdesc">${role.desc}</div>
+        </div>
       </div>
-      <div class="progress-text">${i + 1} / ${S.playerCount}</div>
+    </div>
+    <div class="ractions" id="acts">${acts}</div>
+    <div class="pbar-wrap">
+      <div class="pbar-track"><div class="pbar-fill" style="width:${pct}%"></div></div>
+      <div class="pbar-text">${i+1} / ${S.playerCount}</div>
     </div>
   </div>`;
 }
 
-function renderDone() {
-  return `
-  <div class="screen done-screen">
-    <div class="done-moon">🌕</div>
-    <h1 class="done-title">¡Todas las cartas repartidas!</h1>
-    <p class="done-sub">Que comiencen los aullidos...</p>
-    <div class="done-wolves">🐺🐺🐺</div>
-    <button class="btn btn-primary w-full" onclick="newGame()" style="max-width:280px;margin-bottom:12px">
-      Nueva partida
-    </button>
-    <button class="btn btn-ghost w-full" onclick="goSetup()" style="max-width:280px">
-      Cambiar configuración
-    </button>
+function renderDone(){
+  return`<div class="screen done-screen">
+    <div class="dmoon">🌕</div>
+    <h1 class="dtitle">¡Todas las cartas repartidas!</h1>
+    <p class="dsub">Que comiencen los aullidos...</p>
+    <div class="dwolves">🐺🐺🐺</div>
+    <button class="btn btn-primary w400" onclick="newGame()" style="max-width:280px;margin-bottom:12px">Nueva partida</button>
+    <button class="btn btn-ghost w400" onclick="goSetup()" style="max-width:280px">Cambiar configuración</button>
   </div>`;
 }
 
-/* ────────────────────────────────────────────────
-   MAIN RENDER
-──────────────────────────────────────────────── */
-function render() {
-  const app = document.getElementById('app');
-  switch (S.screen) {
-    case 'setup':  app.innerHTML = renderSetup();  break;
-    case 'names':  app.innerHTML = renderNames();  break;
-    case 'reveal': app.innerHTML = renderReveal(); break;
-    case 'done':   app.innerHTML = renderDone();   break;
+/* ══════════════════════════════════════════
+   RENDER ROUTER
+══════════════════════════════════════════ */
+function render(){
+  const app=document.getElementById('app');
+  switch(S.screen){
+    case'setup':         app.innerHTML=renderSetup();break;
+    case'names':         app.innerHTML=renderNames();break;
+    case'mode':          app.innerHTML=renderMode();break;
+    case'share':         app.innerHTML=renderShare();break;
+    case'local':         app.innerHTML=renderLocal();break;
+    case'done':          app.innerHTML=renderDone();break;
+    case'player-list':   app.innerHTML=renderPlayerList();break;
+    case'reveal-player': app.innerHTML=renderRevealPlayer();break;
   }
 }
 
-render();
+/* ══════════════════════════════════════════
+   INIT — check if opening a shared link
+══════════════════════════════════════════ */
+(function init(){
+  const hash=location.hash;
+  if(hash.startsWith('#g=')){
+    const encoded=hash.slice(3);
+    const gd=decodeGame(encoded);
+    if(gd&&gd.p&&gd.p.length){
+      S.gameData=gd;
+      S.screen='player-list';
+    }
+  }
+  render();
+})();
 </script>
 </body>
 </html>
